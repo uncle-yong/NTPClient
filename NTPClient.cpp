@@ -171,6 +171,7 @@ String NTPClient::getFormattedDate(unsigned long secs) {
   unsigned long days = 0, year = 1970;
   uint8_t month;
   static const uint8_t monthDays[]={31,28,31,30,31,30,31,31,30,31,30,31};
+  static const String months[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
   while((days += (LEAP_YEAR(year) ? 366 : 365)) <= rawTime)
     year++;
@@ -188,7 +189,7 @@ String NTPClient::getFormattedDate(unsigned long secs) {
   }
   String monthStr = ++month < 10 ? "0" + String(month) : String(month); // jan is month 1  
   String dayStr = ++rawTime < 10 ? "0" + String(rawTime) : String(rawTime); // day of month  
-  return String(year) + "-" + monthStr + "-" + dayStr + "T" + this->getFormattedTime(secs ? secs : 0) + "Z";
+  return months[month] + " " + dayStr + " " + String(year); // Date is formatted to Arduino's RTC Library (such as https://github.com/Makuna/Rtc) 
 }
 
 void NTPClient::end() {

@@ -91,6 +91,12 @@ class NTPClient {
     * @return secs argument (or 0 for current date) formatted to ISO 8601
     * like `2004-02-12T15:19:21+00:00`
     */
+    //String getFormattedDate(unsigned long secs = 0);
+	
+	/**
+    * @return returns date formatted for Arduino RTC library such as https://github.com/Makuna/Rtc
+    * like `Jan 01 2000`
+    */
     String getFormattedDate(unsigned long secs = 0);
 
     /**
